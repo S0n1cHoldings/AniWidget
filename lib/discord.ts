@@ -6,7 +6,7 @@ import { env, schema_assert } from '$utils.ts';
 const api = new REST({ version: '9' }).setToken(env.DISCORD_TOKEN);
 
 export const discord_update_profile = (user_id: Snowflake, payload: DiscordPayload) =>
-	api.patch(`/applications/${env.DISCORD_CLIENT_ID}/users/${user_id}/identities/0/profile`, {
+	api.patch(`/applications/${env.DISCORD_CLIENT_ID}/users/${user_id}/identities/${payload.username}/profile`, {
 		body: payload,
 	});
 
