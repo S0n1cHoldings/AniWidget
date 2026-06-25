@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"noEmit": true,
+		"declaration": false,
+		"lib": ["ESNext", "DOM"],
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"target": "ESNext",
+		"skipLibCheck": true,
+		"strict": true,
+		"allowImportingTsExtensions": true,
+		"erasableSyntaxOnly": true,
+		"types": ["*"],
+		"paths": {
+			"$*": ["./lib/*"]
+		}
+	},
+	"exclude": ["dist/", "node_modules", "**/node_modules/*"]
+}
