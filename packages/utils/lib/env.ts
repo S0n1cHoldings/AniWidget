@@ -1,13 +1,13 @@
-import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import arkenv from 'arkenv';
 
 import { config } from 'dotenv';
 
 export const proj_root = join(import.meta.url.replace('file://', ''), '../../../..');
-console.log({ proj_root });
-export const assets_root = join(proj_root, 'assets');
-await mkdir(assets_root, { recursive: true });
+console.log({
+	proj_root,
+	NODE_ENV: Bun.env.NODE_ENV,
+});
 
 export { join };
 

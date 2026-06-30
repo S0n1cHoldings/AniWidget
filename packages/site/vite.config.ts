@@ -1,7 +1,9 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import adapter from 'svelte-adapter-bun';
-import { defineConfig } from 'vite';
+import { defineConfig, type ServerOptions } from 'vite';
+
+const opts: ServerOptions = { host: true, allowedHosts: true };
 
 export default defineConfig({
 	plugins: [
@@ -15,7 +17,8 @@ export default defineConfig({
 			alias: { $comp: 'src/comp' },
 		}),
 	],
-	server: { host: true, allowedHosts: true },
+	server: opts,
+	preview: { ...opts, port: 3000 },
 	define: {
 		// __API_URL__: JSON.stringify(env === 'development' ? 'https://ipa-test.s0n.dev' : 'https://ipa.s0n1c.ca'),
 		// __API_URL__: JSON.stringify(BASE_URL('/')),

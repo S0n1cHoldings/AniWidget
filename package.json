@@ -6,6 +6,8 @@
 	],
 	"scripts": {
 		"site:dev": "bun run --cwd packages/site dev",
+		"build:site": "bun run --cwd packages/site build",
+		"site": "bun run --cwd packages/site preview",
 		"check": "biome check"
 	},
 	"devDependencies": {
