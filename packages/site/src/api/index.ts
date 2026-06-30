@@ -6,6 +6,7 @@ import routes from './routes/index.ts';
 export const aniwidget_api = new Elysia({ prefix: '/api' })
 	.use(cors())
 	.get('/', ({ redirect }) => redirect(BASE_URL('/api/docs').toString(), 302))
+	.get('/health', () => ({ status: 'ok' }))
 	.use(routes);
 
 export type AniWidgetElysia = typeof aniwidget_api;
