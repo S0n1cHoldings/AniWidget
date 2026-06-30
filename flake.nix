@@ -3,17 +3,18 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  outputs = {nixpkgs, ...}: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
-  in {
-    devShells.${system}.default = pkgs.mkShell {
-      packages = with pkgs; [
-        zsh
-        bun
-        biome
-        nodejs_22
-      ];
+  outputs = inputs @ {flake-parts, ...}:
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = ["aarch64-darwin" "x86_64-linux"];
+      perSystem = {pkgs, ...}: {
+        devShells.default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            zsh
+            bun
+            biome
+            nodejs_22
+          ];
+        };
+      };
     };
-  };
 }

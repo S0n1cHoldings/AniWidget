@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+body {
+	background-color: #19202b;
+	color: white;
+}
+
+@theme {
+	--color-primary: #00a6fd;
+}
+
+@utility link {
+	@apply cursor-pointer hover:opacity-80 transition-opacity ease-in-out;
+}
+
+@utility line {
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+@utility line-light {
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+@utility glyph {
+	@apply size-4 opacity-30;
+}
+
+@utility card {
+	@apply bg-white/6 line p-5 rounded-3xl relative;
+}
+
+@utility card-inner {
+	@apply flex flex-col items-center gap-4;
+}
+
+@utility card-inner-placeholder {
+	@apply card-inner absolute top-0 bottom-0 left-0 right-0 justify-center mb-8;
+}
+
+@utility card-footer {
+	@apply flex justify-center absolute bottom-5 left-0 right-0;
+}
+
+@utility card-placeholder {
+	@apply card bg-white/2 shadow-none border border-dashed border-white/20 text-white/50 link;
+}
+
+@utility live {
+	@apply inline-block bg-green-300/50 size-2 rounded-full animate-pulse;
+}
+
+@utility btn {
+	@apply bg-primary py-2 px-4 text-sm font-bold;
+	@apply rounded-lg;
+	@apply link;
+}

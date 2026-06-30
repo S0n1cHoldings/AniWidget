@@ -2,7 +2,15 @@
 	"$schema": "https://biomejs.dev/schemas/2.4.16/schema.json",
 	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"files": {
-		"includes": ["**", "!!dist", "!!docs", "!!**/*.js"]
+		"includes": [
+			"**",
+			"!!dist",
+			"!!docs",
+			"!!**/*.js",
+			"!!packages/**/.svelte-kit",
+			"!!packages/**/build",
+			"!!**/*.svelte"
+		]
 	},
 	"formatter": {
 		"enabled": true,
@@ -13,6 +21,11 @@
 	"javascript": {
 		"formatter": {
 			"quoteStyle": "single"
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
 		}
 	},
 	"linter": {
