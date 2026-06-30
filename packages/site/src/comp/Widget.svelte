@@ -2,7 +2,7 @@
 	import type { AniWidgetUser } from "@aniwidget/core";
 	import cn from "cnfast";
 	import AniWidget from "./AniWidget.svelte";
-	import { aniwidget_update } from "$lib/aniwidget";
+	import { aniwidget_set, aniwidget_update } from "$lib/aniwidget";
 
 	interface Props {
 		user: AniWidgetUser;
@@ -12,6 +12,7 @@
 
 	const widget = $derived(user.widget);
 
+	const set = () => aniwidget_set();
 	const update = () => aniwidget_update();
 </script>
 

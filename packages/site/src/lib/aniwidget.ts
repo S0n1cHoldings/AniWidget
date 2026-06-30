@@ -21,6 +21,11 @@ export async function aniwidget_anilist_auth(token: string) {
 	user.set(res);
 }
 
+export async function aniwidget_set() {
+	const res = await api.user.set();
+	user.set(res);
+}
+
 export async function aniwidget_update() {
 	const res = await api.user.update();
 	user.set(res);

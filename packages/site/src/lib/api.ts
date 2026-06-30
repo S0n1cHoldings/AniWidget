@@ -33,6 +33,7 @@ export const api = {
 	user: {
 		get: _handle_request(() => client.api.user.get()),
 		anilist_login: _handle_request((token: string) => client.api.user.anilist_login.post({ token })),
+		set: _handle_request(() => client.api.user.set.post()),
 		update: _handle_request(() => client.api.user.update.post()),
 	},
 };

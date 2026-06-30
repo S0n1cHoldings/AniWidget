@@ -68,3 +68,5 @@ export const anilist_profile = async (query: AniListClientQuery) => {
 	if (!user) throw new Error('user not found (somehow).');
 	return user;
 };
+
+export type AnilistProfile = Awaited<ReturnType<typeof anilist_profile>>;

@@ -2,7 +2,7 @@ import { type DBUSerAnilistType, DBUser } from '@aniwidget/db';
 import { env, schema_assert, try_prom } from '@aniwidget/utils';
 import { status } from 'elysia';
 import { type JWTPayload, jwtVerify, SignJWT } from 'jose';
-import { anilist_profile } from './anilist/index.ts';
+import { type AnilistProfile, anilist_profile } from './anilist/index.ts';
 import {
 	CDNRoutes,
 	type DiscordProfile,
@@ -96,14 +96,56 @@ const _db_to_widget_data = (x: DBUSerAnilistType['profile']) =>
 		},
 	});
 
+const _raw_anilist_profile_to_db = (x: AnilistProfile): DBUSerAnilistType['profile'] => {
+	if (!x.statistics?.anime || !x.statistics.manga || !x.createdAt)
+		throw status(500, { error: 'something is up with this' });
+	return {
+		id: x.id,
+		username: x.name,
+		pfp: x.avatar?.large ?? 'https://s4.anilist.co/file/anilistcdn/user/avatar/large/default.png',
+		joined_on: new Date(x.createdAt * 1000).toLocaleDateString('en-US', {
+			month: 'long',
+			day: 'numeric',
+			year: 'numeric',
+		}),
+		stats: {
+			total_anime: x.statistics.anime.count,
+			days_watched: (+(x.statistics.anime.minutesWatched / 60 / 24)).toFixed(1),
+			anime_mean_score: x.statistics.anime.meanScore.toFixed(1),
+			total_manga: x.statistics.manga.count,
+			chapters_read: x.statistics.manga.chaptersRead,
+			manga_mean_score: x.statistics.manga.meanScore.toFixed(1),
+		},
+	};
+};
+
 type PreUser = Awaited<ReturnType<typeof _pre_user>>;
+
+async function _update_discord(user_id: Snowflake, profile: DBUSerAnilistType['profile']) {
+	const data = _db_to_widget_data(profile);
+	await discord_profile_update(user_id, discord_profile_payload(data));
+}
+
+export async function aniwidget_set(user_id: Snowflake) {
+	const db_user = await _db_user(user_id);
+	if (!db_user.anilist) throw status(400, { error: 'not linked to anilist.' });
+	await _update_discord(user_id, db_user.anilist.profile);
+	const jwt = await aniwidget_jwt(user_id);
+	return aniwidget_get_user(jwt);
+}
 
 export async function aniwidget_update(user_id: Snowflake) {
 	const db_user = await _db_user(user_id);
 	if (!db_user.anilist) throw status(400, { error: 'not linked to anilist.' });
-	const data = _db_to_widget_data(db_user.anilist.profile);
-	await discord_profile_update(user_id, discord_profile_payload(data));
-	const jwt = await aniwidget_jwt(user_id);
+	const user = await _pre_user(user_id);
+	const anilist = await anilist_profile({ discord_id: user.id });
+
+	db_user.anilist.profile = _raw_anilist_profile_to_db(anilist);
+
+	await db_user.save();
+
+	await _update_discord(user.id, db_user.anilist.profile);
+	const jwt = await aniwidget_jwt(user.id);
 	return aniwidget_get_user(jwt);
 }
 
@@ -117,24 +159,7 @@ export async function aniwidget_anilist_save(user_id: Snowflake, token: string) 
 	const db_user = await _db_user(user.id);
 	db_user.anilist = {
 		token,
-		profile: {
-			id: anilist.id,
-			username: anilist.name,
-			pfp: anilist.avatar?.large ?? 'https://s4.anilist.co/file/anilistcdn/user/avatar/large/default.png',
-			joined_on: new Date(anilist.createdAt * 1000).toLocaleDateString('en-US', {
-				month: 'long',
-				day: 'numeric',
-				year: 'numeric',
-			}),
-			stats: {
-				total_anime: anilist.statistics.anime.count,
-				days_watched: (+(anilist.statistics.anime.minutesWatched / 60 / 24)).toFixed(1),
-				anime_mean_score: anilist.statistics.anime.meanScore.toFixed(1),
-				total_manga: anilist.statistics.manga.count,
-				chapters_read: anilist.statistics.manga.chaptersRead,
-				manga_mean_score: anilist.statistics.manga.meanScore.toFixed(1),
-			},
-		},
+		profile: _raw_anilist_profile_to_db(anilist),
 	};
 	const res = await db_user.save();
 
