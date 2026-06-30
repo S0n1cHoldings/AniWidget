@@ -1,15 +1,21 @@
 import { type InferSchemaType, Schema } from 'mongoose';
 
 const _user_anilist_profile = new Schema({
+	id: { type: Number, required: true },
 	username: { type: String, required: true },
 	pfp: { type: String, required: true },
-	total_anime: { type: Number, required: true },
-	days_watched: { type: String, required: true },
-	anime_mean_score: { type: String, required: true },
-	total_manga: { type: Number, required: true },
-	chapters_read: { type: Number, required: true },
-	manga_mean_score: { type: String, required: true },
 	joined_on: { type: String, required: true },
+	stats: {
+		type: new Schema({
+			total_anime: { type: Number, required: true },
+			days_watched: { type: String, required: true },
+			anime_mean_score: { type: String, required: true },
+			total_manga: { type: Number, required: true },
+			chapters_read: { type: Number, required: true },
+			manga_mean_score: { type: String, required: true },
+		}),
+		required: true,
+	},
 });
 
 const _user_anilist = new Schema({

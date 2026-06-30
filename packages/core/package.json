@@ -1,9 +1,15 @@
 {
 	"name": "@aniwidget/core",
 	"private": true,
+	"main": "./lib/index.ts",
 	"type": "module",
 	"dependencies": {
 		"@aniwidget/db": "workspace:*",
-		"@aniwidget/utils": "workspace:*"
+		"@aniwidget/utils": "workspace:*",
+		"@discordjs/rest": "2.6.1",
+		"aniql": "1.4.0",
+		"arctic": "3.7.0",
+		"discord-api-types": "0.38.49",
+		"jose": "6.2.3"
 	}
 }

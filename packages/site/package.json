@@ -4,9 +4,9 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
-		"preview": "vite preview",
+		"dev": "bunx --bun vite dev",
+		"build": "bunx --bun vite build",
+		"preview": "bunx --bun vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
@@ -14,13 +14,23 @@
 	"devDependencies": {
 		"@sveltejs/kit": "2.68.0",
 		"@sveltejs/vite-plugin-svelte": "7.1.2",
+		"@tailwindcss/vite": "4.3.2",
 		"svelte": "5.56.4",
 		"svelte-adapter-bun": "1.0.1",
 		"svelte-check": "4.7.1",
+		"tailwindcss": "4.3.2",
 		"vite": "8.1.1"
 	},
 	"dependencies": {
+		"@aniwidget/core": "workspace:*",
+		"@aniwidget/utils": "workspace:*",
+		"@elysia/bearer": "1.4.4",
+		"@elysia/cors": "1.4.2",
 		"@elysia/eden": "1.4.10",
-		"@elysia/openapi": "1.4.15"
+		"@elysia/openapi": "1.4.15",
+		"cnfast": "0.0.8",
+		"elysia-oauth2": "2.1.0",
+		"framework7-icons": "5.0.5",
+		"svelte-persisted-store": "0.12.0"
 	}
 }
