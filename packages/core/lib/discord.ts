@@ -1,7 +1,7 @@
+import { env, schema_assert } from '@aniwidget/utils';
 import { REST } from '@discordjs/rest';
 import type { Snowflake } from 'discord-api-types/globals';
-import { type DiscordPayload, type DiscordWidgetData, schema_discord_payload } from '$types.ts';
-import { env, schema_assert } from '$utils.ts';
+import { type DiscordPayload, type DiscordWidgetData, schema_discord_payload } from './types.ts';
 
 const api = new REST({ version: '9' }).setToken(env.DISCORD_TOKEN);
 

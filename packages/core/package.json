@@ -1,0 +1,9 @@
+{
+	"name": "@aniwidget/core",
+	"private": true,
+	"type": "module",
+	"dependencies": {
+		"@aniwidget/db": "workspace:*",
+		"@aniwidget/utils": "workspace:*"
+	}
+}

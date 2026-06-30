@@ -1,5 +1,6 @@
+import { DBUser } from '@aniwidget/db';
+import { AniWidgetCache, env, md5 } from '@aniwidget/utils';
 import type { Snowflake } from '@warsam-e/echo';
-import { Stash } from '@warsam-e/stash';
 import {
 	AniQLClient,
 	type AniQLRequestOptions,
@@ -7,8 +8,6 @@ import {
 	type Query,
 	type QueryGenqlSelection,
 } from 'aniql';
-import { env, md5 } from '$utils.ts';
-import { _db_anilist_auth_get } from './db.ts';
 
 interface AniListClient {
 	query: <R extends QueryGenqlSelection>(
@@ -26,12 +25,13 @@ const _get_client = (discord_id: Snowflake): AniListClient => {
 			client_id: env.ANILIST_CLIENT_ID,
 		},
 		get_token: async () => {
-			const token = await _db_anilist_auth_get(discord_id);
+			const user = await DBUser.findOne({ id: discord_id }).lean();
+			const token = user?.anilist?.token;
 			if (token) return token;
 		},
 	});
 
-	const cache = new Stash(`anilist:${discord_id}`);
+	const cache = new AniWidgetCache(`anilist:${discord_id}`);
 
 	return {
 		query: (request, opts) => {

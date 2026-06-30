@@ -1,0 +1,11 @@
+{
+	"name": "@aniwidget/db",
+	"private": true,
+	"main": "./lib/index.ts",
+	"type": "module",
+	"dependencies": {
+		"@aniwidget/utils": "workspace:*",
+		"mongodb": "7.2.0",
+		"mongoose": "9.6.1"
+	}
+}
