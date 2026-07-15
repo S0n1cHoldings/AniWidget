@@ -187,8 +187,10 @@ const _format_user = (user: PreUser, anilist: DBUSerAnilistType['profile'] | nul
 
 function _user_avatar(user_id: Snowflake, avatar: string | null) {
 	if (!avatar) return null;
-	const path = CDNRoutes.userAvatar(user_id, avatar, avatar.startsWith('a_') ? ImageFormat.GIF : ImageFormat.PNG);
-	return new URL(path, 'https://cdn.discordapp.com/').toString();
+	const path = CDNRoutes.userAvatar(user_id, avatar, avatar.startsWith('a_') ? ImageFormat.WebP : ImageFormat.PNG);
+	const url = new URL(path, 'https://cdn.discordapp.com/');
+	if (avatar.startsWith('a_')) url.searchParams.set('animated', 'true');
+	return url.toString();
 }
 
 export const aniwidget_jwt = (user_id: Snowflake) =>
