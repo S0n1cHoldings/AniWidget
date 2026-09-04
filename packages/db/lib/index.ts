@@ -1,10 +1,14 @@
 import { env } from '@aniwidget/utils';
-import { connect, model } from 'mongoose';
-import { db_schema_user } from './models.ts';
+import { connect, model, models } from 'mongoose';
+import { type DBUserType, db_schema_user } from './models.ts';
 
-await connect(env.MONGODB_URI);
+export const DBUser = models.DBUser
+	? model<DBUserType>('DBUser')
+	: model<DBUserType>('DBUser', db_schema_user, 'users');
 
-export const DBUser = model('DBUser', db_schema_user, 'users');
-await DBUser.init();
+export async function db_init() {
+	await connect(env.MONGODB_URI);
+	await DBUser.init();
+}
 
 export * from './models.ts';

@@ -5,13 +5,15 @@
 		"packages/*"
 	],
 	"scripts": {
-		"site:dev": "bun run --cwd packages/site dev",
+		"dev": "bun run --cwd packages/site dev",
 		"build:site": "bun run --cwd packages/site build",
 		"site": "bun run --cwd packages/site preview",
 		"check": "biome check"
 	},
 	"devDependencies": {
-		"@types/bun": "1.3.13"
+		"@types/bun": "1.3.13",
+		"@typescript/native": "npm:typescript@7.0.2",
+		"typescript": "~6.0.0"
 	},
 	"dependencies": {
 		"arkenv": "0.12.2",

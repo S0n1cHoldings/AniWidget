@@ -1,10 +1,9 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import { goto } from "$app/navigation";
 	import { page } from "$app/state";
 	import { aniwidget_anilist_auth } from "$lib/aniwidget";
-	import { api } from "$lib/api";
 	import { user } from "$lib/stores";
-	import { onMount } from "svelte";
 
 	onMount(async () => {
 		if (!page.url.hash.length) return goto("/", { replaceState: true });

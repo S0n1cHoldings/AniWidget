@@ -8,10 +8,8 @@
 <nav class="flex items-center justify-between">
 	<img src={glyphs.aniwidget} alt="" class="size-15" />
 	<div>
-		<!-- svelte-ignore a11y_click_events_have_key_events -->
-		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<i class="f7-icons text-red-400 link" onclick={logout}
-			>arrow_right_to_line_alt</i
-		>
+		<button type="button" onclick={logout}>
+			<i class="f7-icons text-red-400 link">arrow_right_to_line_alt</i>
+		</button>
 	</div>
 </nav>

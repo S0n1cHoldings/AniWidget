@@ -1,8 +1,7 @@
 <script lang="ts">
 	import type { AniWidgetUser } from "@aniwidget/core";
-
-	import UserCard from "./UserCard.svelte";
 	import AniListCard from "./AniListCard.svelte";
+	import UserCard from "./UserCard.svelte";
 
 	interface Props {
 		user: AniWidgetUser;

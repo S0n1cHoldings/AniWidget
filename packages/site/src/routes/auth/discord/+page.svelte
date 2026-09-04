@@ -1,8 +1,8 @@
 <script lang="ts">
+	import { onMount } from "svelte";
 	import { goto } from "$app/navigation";
 	import { page } from "$app/state";
 	import { user_token } from "$lib/stores";
-	import { onMount } from "svelte";
 
 	onMount(async () => {
 		if (!page.url.hash.length) return goto("/", { replaceState: true });

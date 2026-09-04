@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { AniWidgetUser } from "@aniwidget/core";
-	import cn from "cnfast";
-	import AniWidget from "./AniWidget.svelte";
+	import { cn } from "cn";
 	import { aniwidget_set, aniwidget_update } from "$lib/aniwidget";
+	import AniWidget from "./AniWidget.svelte";
 
 	interface Props {
 		user: AniWidgetUser;
@@ -12,12 +12,10 @@
 
 	const widget = $derived(user.widget);
 
-	const set = () => aniwidget_set();
+	const _set = () => aniwidget_set();
 	const update = () => aniwidget_update();
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
 {#if user.anilist}
 	<AniWidget data={widget ?? user.anilist} />
 	{#if widget}
@@ -32,16 +30,20 @@
 			])}
 		>
 			<div class="flex items-center gap-2">
-				<span class="live"></span>
+				<span class="live shrink-0"></span>
 				<span
 					><b>The stats are live on Discord!</b>
 					<i>Add to widgets list if you haven't yet.</i></span
 				>
 			</div>
 			<div class="flex justify-end w-full">
-				<div class="btn bg-green-300 text-black/60" onclick={update}>
+				<button
+					type="button"
+					class="btn bg-green-300 text-black/60"
+					onclick={update}
+				>
 					Update Stats
-				</div>
+				</button>
 			</div>
 		</div>
 	{:else}
@@ -52,9 +54,13 @@
 				for the first time.
 			</div>
 
-			<div class="btn inline-block float-right mt-5" onclick={update}>
+			<button
+				type="button"
+				class="btn inline-block float-right mt-5"
+				onclick={update}
+			>
 				Set Stats
-			</div>
+			</button>
 		</div>
 	{/if}
 {/if}

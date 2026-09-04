@@ -1,32 +1,45 @@
 {
-	"[typescript]": {
-		"editor.defaultFormatter": "biomejs.biome"
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit",
+		"source.organizeImports.biome": "explicit",
+		"source.organizeImports.ruff": "explicit",
+		"source.fixAll.ruff": "explicit"
 	},
 	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescript]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
 	"[json]": {
 		"editor.defaultFormatter": "biomejs.biome"
 	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[tailwindcss]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[python]": {
+		"editor.defaultFormatter": "charliermarsh.ruff"
+	},
 	"files.associations": {
 		"**/*/site/**/*.css": "tailwindcss"
-	},
-	"editor.codeActionsOnSave": {
-		"source.formatDocument": "explicit",
-		"source.fixAll.biome": "explicit",
-		"source.organizeImports.biome": "explicit"
 	},
 	"files.insertFinalNewline": true,
 	"files.eol": "\n",
 	"editor.insertSpaces": false,
 	"editor.minimap.scale": 2,
 	"editor.minimap.sectionHeaderFontSize": 12,
-	"js/ts.inlayHints.variableTypes.enabled": false,
-	"js/ts.inlayHints.functionLikeReturnTypes.enabled": false,
-	"js/ts.inlayHints.enumMemberValues.enabled": false,
-	"js/ts.inlayHints.parameterTypes.enabled": false,
-	"js/ts.tsserver.experimental.enableProjectDiagnostics": true,
-	"js/ts.inlayHints.parameterNames.enabled": "none",
-	"js/ts.inlayHints.parameterNames.suppressWhenArgumentMatchesName": true,
-	"remote.autoForwardPorts": false
+	"remote.autoForwardPorts": false,
+	"js/ts.experimental.useTsgo": true,
+	"tailwindCSS.files.exclude": ["**/.git/**", "**/node_modules/**", "**/.direnv/**", "**/.svelte-kit/**"],
+	"tailwindCSS.experimental.configFile": {
+		"packages/site/src/routes/layout.css": "packages/site/src/**"
+	},
+	"discord.enabled": false
 }

@@ -3,14 +3,16 @@
 	import Nav from "$comp/Nav.svelte";
 	import Setup from "$comp/Setup.svelte";
 	import Widget from "$comp/Widget.svelte";
-	import { user } from "$lib/stores";
+	import { user as _user } from "$lib/stores";
+
+	const user = $derived($_user);
 </script>
 
-{#if $user}
+{#if user}
 	<div class="flex flex-col gap-4">
 		<Nav />
-		<Cards user={$user} />
-		<Widget user={$user} />
+		<Cards {user} />
+		<Widget {user} />
 	</div>
 {:else}
 	<Setup />

@@ -10,8 +10,8 @@ export default defineConfig({
 		tailwindcss(),
 		sveltekit({
 			compilerOptions: {
-				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
-				runes: ({ filename }) => (filename.split(/[/\\]/).includes('node_modules') ? undefined : true),
+				// Force runes mode for the project. Can be removed in Svelte 6.
+				runes: true,
 			},
 			adapter: adapter(),
 			alias: { $comp: 'src/comp' },
@@ -19,8 +19,4 @@ export default defineConfig({
 	],
 	server: opts,
 	preview: { ...opts, port: 3000 },
-	define: {
-		// __API_URL__: JSON.stringify(env === 'development' ? 'https://ipa-test.s0n.dev' : 'https://ipa.s0n1c.ca'),
-		// __API_URL__: JSON.stringify(BASE_URL('/')),
-	},
 });

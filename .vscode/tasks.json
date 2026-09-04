@@ -1,0 +1,99 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Svelte: Sync",
+			"type": "shell",
+			"command": "bunx",
+			"args": ["svelte-kit", "sync"],
+			"options": {
+				"cwd": "${workspaceFolder}/packages/site"
+			},
+			"problemMatcher": [],
+			"isBackground": true,
+			"presentation": {
+				"reveal": "never",
+				"close": true,
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": false
+			}
+		},
+		{
+			"label": "TypeScript: Root Diagnostics",
+			"type": "shell",
+			"command": "bun",
+			"args": [
+				"${workspaceFolder}/node_modules/@typescript/native/bin/tsc",
+				"--noEmit",
+				"--watch",
+				"--project",
+				"${workspaceFolder}/tsconfig.json"
+			],
+			"isBackground": true,
+			"problemMatcher": "$tsc-watch",
+			"presentation": {
+				"reveal": "never",
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": false
+			},
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+		},
+		{
+			"label": "Svelte: Site Diagnostics",
+			"type": "shell",
+			"dependsOn": "Svelte: Sync",
+			"dependsOrder": "sequence",
+			"command": "bunx",
+			"args": [
+				"--bun",
+				"svelte-check",
+				"--watch",
+				"--tsgo",
+				"--incremental",
+				"--tsconfig",
+				"./tsconfig.json",
+				"--workspace",
+				".",
+				"--output",
+				"machine"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/packages/site"
+			},
+			"isBackground": true,
+			"problemMatcher": {
+				"owner": "svelte",
+				"fileLocation": ["relative", "${workspaceFolder}/packages/site"],
+				"pattern": {
+					"regexp": "^\\d+ (ERROR|WARNING) \"((?![^\"]*\\.svelte-kit/)[^\"]+)\" (\\d+):(\\d+) \"(.*)\"$",
+					"severity": 1,
+					"file": 2,
+					"line": 3,
+					"column": 4,
+					"message": 5
+				},
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "^\\d+ START ",
+					"endsPattern": "^\\d+ COMPLETED "
+				}
+			},
+			"presentation": {
+				"reveal": "never",
+				"focus": false,
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": false
+			},
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+		}
+	]
+}

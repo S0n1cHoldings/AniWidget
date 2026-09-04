@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { DiscordWidgetData } from "@aniwidget/core";
+	import { cn } from "cn";
 	import { glyphs } from "../assets";
-	import cn from "cnfast";
 
 	interface Props {
 		data: DiscordWidgetData;

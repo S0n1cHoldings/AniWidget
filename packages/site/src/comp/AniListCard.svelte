@@ -1,8 +1,8 @@
 <script lang="ts">
 	import type { AniWidgetUser } from "@aniwidget/core";
-	import { glyphs } from "../assets";
+	import { cn } from "cn";
 	import { goto } from "$app/navigation";
-	import cn from "cnfast";
+	import { glyphs } from "../assets";
 
 	interface Props {
 		user: AniWidgetUser;
@@ -15,9 +15,11 @@
 	const login = () => goto("/api/auth/anilist");
 </script>
 
-<!-- svelte-ignore a11y_click_events_have_key_events -->
-<!-- svelte-ignore a11y_no_static_element_interactions -->
-<div class={cn`${anilist ? "card" : "card-placeholder"}`} onclick={login}>
+<button
+	type="button"
+	class={cn`${anilist ? "card" : "card-placeholder"}`}
+	onclick={login}
+>
 	{#if anilist}
 		<div class="card-inner">
 			<img src={anilist.pfp} alt="" class="size-20" />
@@ -38,4 +40,4 @@
 			<img src={glyphs.anilist} alt="" class="glyph" />
 		</div>
 	{/if}
-</div>
+</button>

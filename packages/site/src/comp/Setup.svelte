@@ -1,7 +1,7 @@
 <script lang="ts">
-	import cn from "cnfast";
-	import logo from "../assets/aniwidget.png?url";
+	import { cn } from "cn";
 	import { goto } from "$app/navigation";
+	import logo from "../assets/aniwidget.png?url";
 
 	const login = () => goto("/api/auth/discord");
 </script>
@@ -22,9 +22,8 @@
 		<div class="text-sm mt-4">
 			Beautifully display your AniList stats, on Discord.
 		</div>
-		<!-- svelte-ignore a11y_click_events_have_key_events -->
-		<!-- svelte-ignore a11y_no_static_element_interactions -->
-		<div
+		<button
+			type="button"
 			class={cn([
 				// blah
 				"mt-8",
@@ -33,6 +32,6 @@
 			onclick={login}
 		>
 			Get Started
-		</div>
+		</button>
 	</div>
 </div>
