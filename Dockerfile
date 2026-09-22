@@ -1,4 +1,4 @@
-FROM oven/bun:1.3.13-slim AS base
+FROM oven/bun:1.4.2-slim AS base
 
 WORKDIR /app
 
@@ -20,7 +20,7 @@ FROM base AS production-dependencies
 
 RUN bun install --frozen-lockfile --production --ignore-scripts
 
-FROM oven/bun:1.3.13-slim AS runtime
+FROM oven/bun:1.4.2-slim AS runtime
 
 WORKDIR /app
 

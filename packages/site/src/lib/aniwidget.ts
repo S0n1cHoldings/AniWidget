@@ -4,8 +4,8 @@ import { mounted, user } from './stores.ts';
 
 export async function aniwidget_init(_token: string | null) {
 	mounted.set(false);
-	let res: AniWidgetUser | null = null;
 	if (_token) {
+		let res: AniWidgetUser | null = null;
 		try {
 			res = await api.user.get();
 		} catch {}

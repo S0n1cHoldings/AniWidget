@@ -15,12 +15,11 @@
 		"@sveltejs/kit": "2.70.3",
 		"@sveltejs/vite-plugin-svelte": "7.3.0",
 		"@tailwindcss/vite": "4.3.3",
-		"dotenv": "17.4.2",
-		"svelte": "5.57.0",
+		"svelte": "5.57.1",
 		"svelte-adapter-bun": "1.0.1",
 		"svelte-check": "4.7.6",
 		"tailwindcss": "4.3.3",
-		"vite": "8.2.2"
+		"vite": "8.3.0"
 	},
 	"dependencies": {
 		"@aniwidget/core": "workspace:*",
@@ -30,7 +29,7 @@
 		"@elysia/cors": "1.4.2",
 		"@elysia/eden": "1.4.10",
 		"@elysia/openapi": "1.4.16",
-		"cn": "0.2.5",
+		"cn": "0.3.2",
 		"elysia-oauth2": "2.1.0",
 		"framework7-icons": "5.0.5",
 		"svelte-persisted-store": "0.12.0"

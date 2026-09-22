@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { AniWidgetUser } from "@aniwidget/core";
 	import { cn } from "cn";
-	import { goto } from "$app/navigation";
 	import { glyphs } from "../assets";
 
 	interface Props {
@@ -12,7 +11,7 @@
 
 	const anilist = $derived(user.anilist);
 
-	const login = () => goto("/api/auth/anilist");
+	const login = () => (location.href = "/api/auth/anilist");
 </script>
 
 <button

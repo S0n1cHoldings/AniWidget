@@ -4,7 +4,6 @@
 	"main": "./lib/index.ts",
 	"type": "module",
 	"dependencies": {
-		"@warsam-e/stash": "1.3.4",
-		"dotenv": "17.4.2"
+		"@warsam-e/stash": "1.3.4"
 	}
 }

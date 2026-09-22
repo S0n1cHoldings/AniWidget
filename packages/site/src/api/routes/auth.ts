@@ -76,6 +76,8 @@ const anilist = new Elysia({ prefix: '/anilist' })
 			token: access_token,
 		}).toString();
 
+		console.log({ url });
+
 		return redirect(url.toString(), 302);
 	});
 
